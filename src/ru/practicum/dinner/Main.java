@@ -1,5 +1,6 @@
 package ru.practicum.dinner;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -74,35 +75,24 @@ public class Main {
                                "количество наборов не может быть равно 0 или меньше 0.");
             return;
         }
-        if (dc.getSetOfMealTypes().isEmpty()) {
-            System.out.println("Вводите типы блюда из меню, разделяя символом переноса строки (enter). " +
+        System.out.println("Вводите типы блюда из меню, разделяя символом переноса строки (enter). " +
                                "Для завершения ввода введите пустую строку");
-        } else {
-            System.out.println("Ранее введенные типы блюд: " + dc.getSetOfMealTypes() +
-                               "\nДля очистки введите clear и нажмите Enter.");
-            System.out.println("Для генерации комбинаций блюд на основе ранее введенных типов, нажмите Enter. \n" +
-                               "Для добавления нового типа введите Имя типа и нажмите Enter. " +
-                               "\n\nДля завершения ввода нажмите Enter. ");
-        }
-        String nextItem = scanner.nextLine();
 
+        String nextItem = scanner.nextLine();
+        ArrayList<String> selectedTypes = new ArrayList<>();
         //реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-            if (nextItem.equals("clear")) {
-                dc.clearSetOfMealTypes();
-            } else {
                 if (!dc.checkType(nextItem)) {
                     System.out.println("Вы ввели несуществующий тип блюда! Повторите ввод: ");
                 } else {
-                    dc.saveSetOfMealTypes(nextItem);
+                    selectedTypes.add(nextItem);
                 }
-            }
             nextItem = scanner.nextLine();
         }
 
         // сгенерируйте комбинации блюд и выведите на экран
-        if (!dc.getSetOfMealTypes().isEmpty()) {
-            dc.printSetOfCombos(dc.createDishCombos(numberOfCombos, random));
+        if (!selectedTypes.isEmpty()) {
+            dc.printSetOfCombos(dc.createDishCombos(numberOfCombos, selectedTypes, random));
         }
 
     }
