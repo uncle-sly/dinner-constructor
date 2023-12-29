@@ -27,11 +27,8 @@ public class DinnerConstructor {
         if (dishNames == null) {
             dishNames = new ArrayList<>();
             dishMenu.put(dishType, dishNames);
-            System.out.println(dishMenu);
         }
         dishNames.add(dishName);
-        System.out.println(dishNames);
-        System.out.println(dishMenu);
 //        ArrayList<String> dishNames = dishMenu.computeIfAbsent(dishType, k -> new ArrayList<>());
 //        dishNames.add(dishName);
     }
